@@ -1,13 +1,29 @@
 {
-    "name": "pluru",
+    "name": "@yaredfall/pluru",
+    "private": false,
     "version": "0.0.0",
-    "description": "",
+    "description": "Pluralization for Russian words",
+    "keywords": [
+        "plural",
+        "pluralize",
+        "pluralization",
+        "russian",
+        "ru"
+    ],
+    "files": [
+        "dist"
+    ],
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.mts",
+            "default": "./dist/index.mjs"
+        }
+    },
     "scripts": {
         "test": "vitest",
         "build": "tsdown",
         "release": "pnpm build && bumpp && pnpm publish"
     },
-    "keywords": [],
     "author": "",
     "license": "MIT",
     "packageManager": "pnpm@10.9.0",
