@@ -4,7 +4,8 @@
     "description": "",
     "scripts": {
         "test": "vitest",
-        "build": "tsdown"
+        "build": "tsdown",
+        "release": "pnpm build && bumpp && pnpm publish"
     },
     "keywords": [],
     "author": "",
