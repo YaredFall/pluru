@@ -24,6 +24,13 @@
         "build": "tsdown",
         "release": "pnpm build && bumpp && pnpm publish --access public"
     },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/YaredFall/pluru.git"
+    },
+    "bugs": {
+        "url": "https://github.com/YaredFall/pluru/issues"
+    },
     "author": "",
     "license": "MIT",
     "packageManager": "pnpm@10.9.0",
