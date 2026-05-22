@@ -2,7 +2,7 @@ import { applyTemplate, isFew, isOne, resolveForms } from "./shared";
 import type { FormsInput, GetPluralWord } from "./types";
 
 function getPluralForm(val: number, forms: FormsInput) {
-    const { one, few, many } = resolveForms(forms);
+    const [one, few, many] = resolveForms(forms);
 
     if (few === undefined) return val > 1 ? many : one;
     else if (isOne(val)) return one;

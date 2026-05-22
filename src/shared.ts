@@ -10,8 +10,8 @@ export function isFew(val: number): boolean {
 export function resolveForms(forms: FormsInput) {
     if (forms.length === 1) forms = forms[0];
 
-    if (forms.length === 2) return { one: forms[0], many: forms[1] };
-    else if (forms.length === 3) return { one: forms[0], few: forms[1], many: forms[2] };
+    if (forms.length === 2) return [forms[0], undefined, forms[1]] as const;
+    else if (forms.length === 3) return [forms[0], forms[1], forms[2]] as const;
 
     throw new Error("Invalid number of arguments");
 }
