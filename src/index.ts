@@ -42,8 +42,17 @@ function getPluralVerbForm(val: number): Form {
     if (isFew(val)) return Form.Few;
     return Form.Many;
 }
-function getPluralVerb(val: number, ...forms: ThreeForms) {
-    return forms[getPluralVerbForm(val)].replaceAll("%d", val.toString());
+
+function getPluralVerb(val: number, ...forms: TwoForms): string;
+function getPluralVerb(val: number, ...forms: ThreeForms): string;
+function getPluralVerb(val: number, ...forms: TwoForms | ThreeForms) {
+    let form: string;
+
+    if (forms.length === 2) form = val > 1 ? forms[1] : forms[0];
+    else if (forms.length === 3) form = forms[getPluralVerbForm(val)];
+    else throw new Error("Invalid number of arguments");
+
+    return form.replaceAll("%d", val.toString());
 }
 
 export { getPluralNoun as pluralize, getPluralVerb as pluralizeVerb };
