@@ -1,7 +1,7 @@
 type TwoForms = [one: string, many: string];
 type ThreeForms = [one: string, few: string, many: string];
 
-type FormsInput = TwoForms | ThreeForms;
+type FormsInput = TwoForms | ThreeForms | [TwoForms] | [ThreeForms];
 
 function isOne(val: number): boolean {
     return val % 10 === 1 && val % 100 !== 11;
@@ -11,6 +11,8 @@ function isFew(val: number): boolean {
 }
 
 function resolveForms(forms: FormsInput) {
+    if (forms.length === 1) forms = forms[0];
+
     if (forms.length === 2) return { one: forms[0], many: forms[1] };
     else if (forms.length === 3) return { one: forms[0], few: forms[1], many: forms[2] };
 
@@ -31,8 +33,10 @@ function getPluralNounForm(val: number, forms: FormsInput) {
 }
 
 function getPluralNoun(val: number, ...forms: TwoForms): string;
+function getPluralNoun(val: number, ...forms: [TwoForms]): string;
 function getPluralNoun(val: number, ...forms: ThreeForms): string;
-function getPluralNoun(val: number, ...forms: TwoForms | ThreeForms) {
+function getPluralNoun(val: number, ...forms: [ThreeForms]): string;
+function getPluralNoun(val: number, ...forms: FormsInput) {
     return applyTemplate(getPluralNounForm(val, forms), val);
 }
 
@@ -50,8 +54,10 @@ function getPluralVerbForm(val: number, forms: FormsInput) {
 }
 
 function getPluralVerb(val: number, ...forms: TwoForms): string;
+function getPluralVerb(val: number, ...forms: [TwoForms]): string;
 function getPluralVerb(val: number, ...forms: ThreeForms): string;
-function getPluralVerb(val: number, ...forms: TwoForms | ThreeForms) {
+function getPluralVerb(val: number, ...forms: [ThreeForms]): string;
+function getPluralVerb(val: number, ...forms: FormsInput) {
     return applyTemplate(getPluralVerbForm(val, forms), val);
 }
 
