@@ -3,6 +3,13 @@ type ThreeForms = [one: string, few: string, many: string];
 
 type FormsInput = TwoForms | ThreeForms | [TwoForms] | [ThreeForms];
 
+interface GetPluralWord {
+    (val: number, ...forms: TwoForms): string;
+    (val: number, ...forms: ThreeForms): string;
+    (val: number, ...forms: [TwoForms]): string;
+    (val: number, ...forms: [ThreeForms]): string;
+}
+
 function isOne(val: number): boolean {
     return val % 10 === 1 && val % 100 !== 11;
 }
@@ -32,13 +39,9 @@ function getPluralNounForm(val: number, forms: FormsInput) {
     else return many;
 }
 
-function getPluralNoun(val: number, ...forms: TwoForms): string;
-function getPluralNoun(val: number, ...forms: [TwoForms]): string;
-function getPluralNoun(val: number, ...forms: ThreeForms): string;
-function getPluralNoun(val: number, ...forms: [ThreeForms]): string;
-function getPluralNoun(val: number, ...forms: FormsInput) {
+const getPluralNoun: GetPluralWord = (val: number, ...forms: FormsInput) => {
     return applyTemplate(getPluralNounForm(val, forms), val);
-}
+};
 
 function getPluralVerbForm(val: number, forms: FormsInput) {
     const { one, few, many } = resolveForms(forms);
@@ -53,12 +56,8 @@ function getPluralVerbForm(val: number, forms: FormsInput) {
     else return many;
 }
 
-function getPluralVerb(val: number, ...forms: TwoForms): string;
-function getPluralVerb(val: number, ...forms: [TwoForms]): string;
-function getPluralVerb(val: number, ...forms: ThreeForms): string;
-function getPluralVerb(val: number, ...forms: [ThreeForms]): string;
-function getPluralVerb(val: number, ...forms: FormsInput) {
+const getPluralVerb: GetPluralWord = (val: number, ...forms: FormsInput) => {
     return applyTemplate(getPluralVerbForm(val, forms), val);
-}
+};
 
 export { getPluralNoun as pluralize, getPluralVerb as pluralizeVerb };
