@@ -9,6 +9,7 @@ describe("pluru", () => {
 
         assert.equal(pluralize(0, one, many), "0 файл");
         assert.equal(pluralize(0, one, few, many), "0 файлов");
+        assert.equal(pluralize(0, [one, few, many]), "0 файлов");
     });
 
     it("One or many", () => {
@@ -19,10 +20,13 @@ describe("pluru", () => {
         assert.equal(pluralize(2, one, many), many);
         assert.equal(pluralize(10, one, many), many);
         assert.equal(pluralize(21, one, many), many);
+        assert.equal(pluralize(21, [one, many]), many);
+
         assert.equal(pluralize(1, one, many, many), one);
         assert.equal(pluralize(2, one, many, many), many);
         assert.equal(pluralize(3, one, many, many), many);
         assert.equal(pluralize(21, one, many, many), one);
+        assert.equal(pluralize(21, [one, many, many]), one);
     });
 
     it("One, few and many (noun)", () => {
@@ -34,6 +38,7 @@ describe("pluru", () => {
         assert.equal(pluralize(3, one, few, many), few);
         assert.equal(pluralize(4, one, few, many), few);
         assert.equal(pluralize(5, one, few, many), many);
+        assert.equal(pluralize(5, [one, few, many]), many);
     });
 
     it("Templating", () => {
